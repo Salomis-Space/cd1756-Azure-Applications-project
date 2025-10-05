@@ -1,10 +1,12 @@
+'''
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'secret-key'
-
+    
+  
     BLOB_ACCOUNT = os.environ.get('BLOB_ACCOUNT') or 'ENTER_STORAGE_ACCOUNT_NAME'
     BLOB_STORAGE_KEY = os.environ.get('BLOB_STORAGE_KEY') or 'ENTER_BLOB_STORAGE_KEY'
     BLOB_CONTAINER = os.environ.get('BLOB_CONTAINER') or 'ENTER_IMAGES_CONTAINER_NAME'
@@ -13,6 +15,7 @@ class Config(object):
     SQL_DATABASE = os.environ.get('SQL_DATABASE') or 'ENTER_SQL_DB_NAME'
     SQL_USER_NAME = os.environ.get('SQL_USER_NAME') or 'ENTER_SQL_SERVER_USERNAME'
     SQL_PASSWORD = os.environ.get('SQL_PASSWORD') or 'ENTER_SQL_SERVER_PASSWORD'
+    
     # Below URI may need some adjustments for driver version, based on your OS, if running locally
     SQLALCHEMY_DATABASE_URI = 'mssql+pyodbc://' + SQL_USER_NAME + '@' + SQL_SERVER + ':' + SQL_PASSWORD + '@' + SQL_SERVER + ':1433/' + SQL_DATABASE  + '?driver=ODBC+Driver+17+for+SQL+Server'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -39,3 +42,34 @@ class Config(object):
     SCOPE = ["User.Read"] # Only need to read user profile for this app
 
     SESSION_TYPE = "filesystem"  # Token cache will be stored in server-side session
+    '''
+import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+class Config(object):
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'secret-key'
+
+    # Azure Blob Storage configuration
+    BLOB_ACCOUNT = os.environ.get('BLOB_ACCOUNT') or 'zoo1store'
+    BLOB_STORAGE_KEY = os.environ.get('BLOB_STORAGE_KEY') or '7/We3b85L33htYHZ5nEFf+jMuIKxEuo7TBKaqVlYScOnhiHomZcLvGEddS4YmqWsBH5ZdZ+tVb27+AStTBGrCw=='
+    BLOB_CONTAINER = os.environ.get('BLOB_CONTAINER') or '$logs'
+
+    # Azure SQL Database configuration
+    SQL_SERVER = os.environ.get('SQL_SERVER') or 'az-server-zoo.database.windows.net'
+    SQL_DATABASE = os.environ.get('SQL_DATABASE') or 'zoodb'
+    SQL_USER_NAME = os.environ.get('SQL_USER_NAME') or 'udacity-user'
+    SQL_PASSWORD = os.environ.get('SQL_PASSWORD') or 'Uda@01234'
+    SQLALCHEMY_DATABASE_URI = (
+        'mssql+pyodbc://' + SQL_USER_NAME + '@' + SQL_SERVER + ':' + SQL_PASSWORD +
+        '@' + SQL_SERVER + ':1433/' + SQL_DATABASE + '?driver=ODBC+Driver+17+for+SQL+Server'
+    )
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    ### Info for MS Authentication ###
+    CLIENT_SECRET = "ENTER_CLIENT_SECRET_HERE"
+    AUTHORITY = "https://login.microsoftonline.com/common"
+    CLIENT_ID = "ENTER_CLIENT_ID_HERE"
+    REDIRECT_PATH = "/getAToken"
+    SCOPE = ["User.Read"]
+    SESSION_TYPE = "filesystem"
