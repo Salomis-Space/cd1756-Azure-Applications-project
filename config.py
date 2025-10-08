@@ -1,4 +1,6 @@
 
+
+
 import os
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -37,7 +39,7 @@ class Config(object):
 
     CLIENT_ID = "0eec63cb-77b7-49d8-a7a4-9143f8b4b317"
 
-    REDIRECT_PATH = "https://localhost:5555/getAToken"  # Used to form an absolute URL; must match to app's redirect_uri set in AAD
+    REDIRECT_PATH = "getAToken"  # Used to form an absolute URL; must match to app's redirect_uri set in AAD
 
     # You can find the proper permission names from this document
     # https://docs.microsoft.com/en-us/graph/permissions-reference
